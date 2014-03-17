@@ -6,7 +6,6 @@ GEN_FOLDERS = ./bin ./build ./doc
 
 #LINK_PATH_FLAGS := -L/usr/local/lib/
 
-# === Are we on Linux (Jack) or Mac-OSX (Kay)? ===
 
 UNAME = $(shell uname -s)
 
@@ -91,22 +90,12 @@ endif
 
 # ===================================================================
 
-.PHONY : clean tidy backup test test-valgrind
+.PHONY : clean tidy backup
 
 all : xychain backup
 
 build/%.o : source/%.cpp $(GEN_FOLDERS)
 	$(COMPILER) $(COMPILER_FLAGS) -c $< -o $@
-
-# ====== Testing =======
-
-TESTS = threadpool-test spins-test random-test xychain-test
-
-test-valgrind : $(TESTS)
-	$(foreach var,$(TESTS),valgrind --leak-check=full ./bin/$(var);)
-
-test : $(TESTS)
-	$(foreach var,$(TESTS),./bin/$(var);)
 
 # ====== Backup  =======
 
@@ -132,21 +121,6 @@ backups/latest : $(ALL_SOURCES)
 	mkdir -p backups
 
 # ====== Executables =======
-
-threadpool-test : build/threadpool.o build/threadpool-test.o $(GEN_FOLDERS)
-	$(LINKER) build/threadpool.o build/threadpool-test.o $(LINKER_FLAGS) -o bin/$@
-
-spins-test: build/spins-test.o $(GEN_FOLDERS)
-	$(LINKER) build/spins-test.o $(LINKER_FLAGS) -o bin/$@
-
-random-test: build/random-test.o $(GEN_FOLDERS)
-	$(LINKER) build/random-test.o $(LINKER_FLAGS) -o bin/$@
-
-xychain-test: build/xychain.o build/xychain-test.o $(COMMON)
-	$(LINKER) build/xychain.o build/xychain-test.o $(COMMON_OBJECTS) $(LINKER_FLAGS) -o bin/$@
-
-xychain-mpi-test-main: build/xychain-mpi.o build/xychain-mpi-test-main.o $(COMMON)
-	$(LINKER) build/xychain-mpi.o build/xychain-mpi-test-main.o $(COMMON_OBJECTS) $(LINKER_FLAGS) -o bin/$@
 
 xychain : build/xychain.o build/xychain-cli.o build/xychain-cli-main.o $(COMMON)
 	$(LINKER) build/xychain.o build/xychain-cli.o build/xychain-cli-main.o $(COMMON_OBJECTS) $(LINKER_FLAGS) -o bin/$@
