@@ -1,0 +1,17 @@
+--annealing_steps=64
+--array_dims=32,32
+--island_dims=4,4,4
+--initial_config=random
+--inter_island_coupling=0.072
+--inter_island_disorder=none
+--intra_island_coupling=1
+--intra_island_disorder=none
+--proximity_form
+--island_spacing=100
+--mc_sweeps=2000
+--overrelax_freq=10
+--temp_range=0,0.1
+--threads=4
+--visuals
+--frame_freq=100
+--window_dims=512,512

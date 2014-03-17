@@ -1,0 +1,16 @@
+--annealing_steps=1
+--array_dims=64,64
+--initial_config=twisted-pair
+--inter_island_coupling=1
+--inter_island_disorder=none
+--intra_island_coupling=0
+--intra_island_disorder=none
+--island_dims=1
+--island_spacing=0
+--mc_sweeps=2048000
+--overrelax_freq=1
+--print_freq=1000
+--noproximity_form
+--temp_range=-1
+--island_field_config=uniform
+--novisuals
