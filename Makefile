@@ -93,7 +93,7 @@ endif
 
 .PHONY : clean tidy backup test test-valgrind
 
-all : xychain backup tools
+all : xychain backup
 
 build/%.o : source/%.cpp $(GEN_FOLDERS)
 	$(COMPILER) $(COMPILER_FLAGS) -c $< -o $@
